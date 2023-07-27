@@ -4,8 +4,14 @@
   "description": "Frontend Technical Assessment - iTunes podcasts mini-app",
   "main": "index.js",
   "scripts": {
+    "build:pro": "webpack --mode production",
+    "build:dev": "webpack --mode development",	
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "@jsm94",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "webpack": "^5.88.2",
+    "webpack-cli": "^5.1.4"
+  }
 }

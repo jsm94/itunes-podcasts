@@ -78,3 +78,17 @@ Following the previous guidelines and making some assumptions and opinions, I de
 - CSS: only native CSS applying the BEM approach
 
 I also decided to implement a hexagonal architecture and DDD for better scalability and testable code.
+
+---
+
+## Instructions
+
+### Tools & Versions
+
+- _Node v16.20.1_
+- _npm 8.19.4_
+
+### Build
+
+- Production bundle: `npm run build:pro`
+- Development bundle: `npm run build:dev`
