@@ -1,0 +1,12 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+echo "🎢 Checking that all tests pass..."
+
+npm run test
+
+echo "💎 Linting and formatting your staged files..."
+
+npx lint-staged
+
+echo "🚀 All done! ✨"
