@@ -16,19 +16,23 @@ const ruleForCSS = {
 
 const rules = [ruleForTSX, ruleForCSS];
 
-module.exports = {
-  output: {
-    path: path.resolve(__dirname, "build"),
-  },
-  plugins: [
-    new HtmlWebpackPlugin({
-      template: path.resolve(src, "index.html"),
-    }),
-  ],
-  module: {
-    rules,
-  },
-  resolve: {
-    extensions: [".ts", ".tsx", ".js", ".jsx"],
-  },
+module.exports = (env, argv) => {
+  const isProduction = argv.mode === "production";
+  return {
+    output: {
+      filename: isProduction ? "[name].[contenthash].js" : "[name].js",
+      path: path.resolve(__dirname, "build"),
+    },
+    plugins: [
+      new HtmlWebpackPlugin({
+        template: path.resolve(src, "index.html"),
+      }),
+    ],
+    module: {
+      rules,
+    },
+    resolve: {
+      extensions: [".ts", ".tsx", ".js", ".jsx"],
+    },
+  };
 };
