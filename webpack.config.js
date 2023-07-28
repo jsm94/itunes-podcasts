@@ -6,13 +6,6 @@ const ruleForTSX = {
   test: /\.(jsx?|tsx?)$/,
   include: src,
   loader: "babel-loader",
-  options: {
-    presets: [
-      "@babel/preset-env",
-      "@babel/preset-typescript",
-      ["@babel/preset-react", { runtime: "automatic" }],
-    ],
-  },
 };
 
 const ruleForCSS = {

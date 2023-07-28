@@ -76,6 +76,7 @@ Following the previous guidelines and making some assumptions and opinions, I de
 - Webpack: for not using a pre-configured bundler and fine-tune this project from the start.
 - TypeScript: a JavaScript superset to improve development experience and maintainability with types and interfaces.
 - CSS: only native CSS applying the BEM approach
+- Jest & React Testing Library: for testing purpouses
 
 I also decided to implement a hexagonal architecture and DDD for better scalability and testable code.
 
@@ -93,3 +94,4 @@ I also decided to implement a hexagonal architecture and DDD for better scalabil
 - Production bundle: `npm run build:pro`
 - Development bundle: `npm run build:dev`
 - Start Dev Server: `npm run start`
+- Run tests: `npm run test`
