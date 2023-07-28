@@ -73,10 +73,11 @@ URL: `/podcast/{podcastId}/episode/{episodeId}`
 
 Following the previous guidelines and making some assumptions and opinions, I decide to choose the next stack for the development:
 
-- Webpack: for not using a pre-configured bundler and fine-tune this project from the start.
-- TypeScript: a JavaScript superset to improve development experience and maintainability with types and interfaces.
-- CSS: only native CSS applying the BEM approach
-- Jest & React Testing Library: for testing purpouses
+- **Webpack**: for not using a pre-configured bundler and fine-tune this project from the start.
+- **TypeScript**: a JavaScript superset to improve development experience and maintainability with types and interfaces.
+- **CSS**: only native CSS applying the BEM approach
+- **Jest & React Testing Library**: for testing purpouses
+- **ESLint & Prettier**: for ensuring code quality, consistency, and adherence to coding standards.
 
 I also decided to implement a hexagonal architecture and DDD for better scalability and testable code.
 
@@ -93,5 +94,10 @@ I also decided to implement a hexagonal architecture and DDD for better scalabil
 
 - Production bundle: `npm run build:pro`
 - Development bundle: `npm run build:dev`
+
+### Dev Scripts
+
 - Start Dev Server: `npm run start`
 - Run tests: `npm run test`
+- Lint: `npm run lint` or `npm run lint:fix`
+- Format: `npm run format`
