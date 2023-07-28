@@ -6,4 +6,10 @@ describe("App", () => {
     const { container } = render(<App />);
     expect(container.firstChild).toBeInTheDocument();
   });
+
+  it("renders the header with the text 'Podcaster'", () => {
+    const { getByRole } = render(<App />);
+    const header = getByRole("heading", { name: /podcaster/i });
+    expect(header).toBeInTheDocument();
+  });
 });
