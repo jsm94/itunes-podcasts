@@ -1,0 +1,10 @@
+* {
+  --app-layout-max-width: 75rem;
+
+  /** Colors */
+  --color-primary: steelblue;
+  --color-secondary: lightgray;
+
+  /* Headings styles */
+  --heading-h1-font-size: 2rem;
+}

@@ -80,7 +80,8 @@ Following the previous guidelines and making some assumptions and opinions, I de
 - **ESLint & Prettier**: for ensuring code quality, consistency, and adherence to coding standards.
 - **Husky**: for run tests, lint and format before a commit to ensure code quality.
 
-I also decided to implement a hexagonal architecture and DDD for better scalability and testable code.
+I also decided to implement a **hexagonal architecture** and **DDD** for better scalability and testable code.
+Use of **ITCSS** architecture to organize the css in conjunction with the **BEM** methodology, thus improving scalability and maintenance of the project and its components.
 
 ---
 

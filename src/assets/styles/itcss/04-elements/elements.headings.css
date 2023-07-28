@@ -1,0 +1,4 @@
+h1 {
+  font-size: var(--heading-h1-font-size);
+  color: var(--color-primary);
+}
