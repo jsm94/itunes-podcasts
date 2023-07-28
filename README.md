@@ -92,3 +92,4 @@ I also decided to implement a hexagonal architecture and DDD for better scalabil
 
 - Production bundle: `npm run build:pro`
 - Development bundle: `npm run build:dev`
+- Start Dev Server: `npm run start`
