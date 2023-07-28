@@ -5,12 +5,24 @@
   "main": "index.js",
   "scripts": {
     "build:pro": "webpack --mode production",
-    "build:dev": "webpack --mode development",	
+    "build:dev": "webpack --mode development",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "@jsm94",
   "license": "ISC",
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
   "devDependencies": {
+    "@babel/core": "^7.22.9",
+    "@babel/preset-env": "^7.22.9",
+    "@babel/preset-react": "^7.22.5",
+    "@babel/preset-typescript": "^7.22.5",
+    "@types/react": "^18.2.17",
+    "@types/react-dom": "^18.2.7",
+    "babel-loader": "^9.1.3",
+    "typescript": "^5.1.6",
     "webpack": "^5.88.2",
     "webpack-cli": "^5.1.4"
   }
