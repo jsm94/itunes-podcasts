@@ -1,5 +1,6 @@
+import { Outlet } from "react-router-dom";
+
 import { Header } from "./components/header";
-import { Home } from "./pages/home/home";
 
 export const App: React.FC = () => {
   return (
@@ -8,7 +9,7 @@ export const App: React.FC = () => {
         <h1>Podcaster</h1>
       </Header>
       <main className="app-layout__main">
-        <Home />
+        <Outlet />
       </main>
     </div>
   );
