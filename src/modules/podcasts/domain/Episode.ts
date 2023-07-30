@@ -1,6 +1,8 @@
 export interface Episode {
-  id: string;
+  id: number;
   title: string;
-  description: string;
-  audio: string;
+  description: string | undefined;
+  releaseDate: Date;
+  duration: number | undefined;
+  audio: string | undefined;
 }

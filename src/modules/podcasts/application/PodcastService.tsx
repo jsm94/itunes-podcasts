@@ -1,3 +1,4 @@
+import { Episode } from "../domain/Episode";
 import { Podcast } from "../domain/Podcast";
 import { PodcastRepository } from "../domain/PodcastRepository";
 
@@ -8,7 +9,7 @@ export class PodcastService {
     return this.repository.getMostPopular(limit);
   }
 
-  getPodcastById(id: string): Promise<Podcast> {
-    return this.repository.getById(id);
+  getEpisodesByPodcastId(id: string): Promise<Episode[]> {
+    return this.repository.getEpisodes(id);
   }
 }
