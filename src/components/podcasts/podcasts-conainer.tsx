@@ -1,22 +1,14 @@
-import { useEffect, useState } from "react";
-
-import { PodcastService } from "../../modules/podcasts/application/PodcastService";
-import { Podcast } from "../../modules/podcasts/domain/Podcast";
-import { ApiPodcastService } from "../../modules/podcasts/infra/ApiPodcastService";
-
 import { PodcastCard } from "./podcast-card";
 
+import { useEffect } from "react";
+import { usePodcasts } from "../../hooks/podcasts/usePodcasts";
 import "./podcast-container.css";
 
 export const PodcastsContainer = () => {
-  const [podcasts, setPodcasts] = useState<Podcast[]>([]);
+  const { podcasts, getPodcasts } = usePodcasts();
 
   useEffect(() => {
-    (async () => {
-      const podcastApi = new PodcastService(new ApiPodcastService());
-      const response = await podcastApi.getMostPopularPodcasts(100);
-      setPodcasts(response);
-    })();
+    getPodcasts();
   }, []);
 
   return (
