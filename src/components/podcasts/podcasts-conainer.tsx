@@ -10,14 +10,36 @@ import "./podcast-container.css";
 export const PodcastsContainer = () => {
   const { podcasts, getPodcasts } = usePodcasts();
   const [filter, setFilter] = useState("");
+  const [filteredPodcasts, setFilteredPodcasts] = useState(podcasts);
 
   useEffect(() => {
     getPodcasts();
   }, []);
 
+  useEffect(() => {
+    setFilteredPodcasts(podcasts);
+  }, [podcasts]);
+
+  useEffect(() => {
+    setFilteredPodcasts(
+      podcasts.filter(
+        (podcast) =>
+          podcast.title
+            .toLocaleLowerCase()
+            .includes(filter.toLocaleLowerCase()) ||
+          podcast.author
+            .toLocaleLowerCase()
+            .includes(filter.toLocaleLowerCase()),
+      ),
+    );
+  }, [filter]);
+
   return (
     <div className="podcasts-container">
       <div className="podcasts-container__filter">
+        <span role="status" className="badge">
+          {filteredPodcasts.length}
+        </span>
         <Input
           type="text"
           placeholder="Filter podcasts..."
@@ -27,23 +49,9 @@ export const PodcastsContainer = () => {
         />
       </div>
       <div className="podcasts-container__list">
-        {podcasts
-          .filter(
-            (podcast) =>
-              podcast.title
-                .toLocaleLowerCase()
-                .includes(filter.toLocaleLowerCase()) ||
-              podcast.author
-                .toLocaleLowerCase()
-                .includes(filter.toLocaleLowerCase()),
-          )
-          .map((podcast) => (
-            <PodcastCard
-              key={podcast.id}
-              podcast={podcast}
-              onClick={() => {}}
-            />
-          ))}
+        {filteredPodcasts.map((podcast) => (
+          <PodcastCard key={podcast.id} podcast={podcast} onClick={() => {}} />
+        ))}
       </div>
     </div>
   );

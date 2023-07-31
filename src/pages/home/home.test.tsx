@@ -48,4 +48,16 @@ describe("Home", () => {
       screen.queryByText(/A History of Rock Music in 500 Songs/i),
     ).not.toBeInTheDocument();
   });
+
+  it("should show a count of the filtered podcasts", async () => {
+    const { getByRole, getByPlaceholderText, getByText } = render(<Home />);
+    const input = getByPlaceholderText(/filter podcasts.../i);
+    await waitFor(() => {
+      expect(
+        getByText(/A History of Rock Music in 500 Songs/i),
+      ).toBeInTheDocument();
+    });
+    fireEvent.change(input, { target: { value: "history" } });
+    expect(getByRole("status").innerHTML === "1").toBeTruthy();
+  });
 });
