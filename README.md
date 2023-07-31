@@ -36,11 +36,11 @@ This technical assessment consists of a mini-app to listen to music podcasts.
 
 URL: `/`
 
-- [ ] Show the list of the 100 most popular podcasts according to this Apple's list:
+- [x] Show the list of the 100 most popular podcasts according to this Apple's list:
       `https://itunes.apple.com/us/rss/toppodcasts/limit=100/genre=1310/json`
-- [ ] The list results should be cached for 1 day to not make the API call again while cached.
-- [ ] The users could filter the podcast list by writing on the input search. The string should match with podcast title and/or author's name.
-- [ ] The list should react immediately with the filter while typing.
+- [x] The list results should be cached for 1 day to not make the API call again while cached.
+- [x] The users could filter the podcast list by writing on the input search. The string should match with podcast title and/or author's name.
+- [x] The list should react immediately with the filter while typing.
 - [ ] Click on a podcast should navigate to the podcast detail view.
 
 ### Podcast detail
