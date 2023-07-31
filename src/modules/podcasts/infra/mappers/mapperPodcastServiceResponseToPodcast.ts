@@ -6,7 +6,7 @@ export const mapperPodcastServiceResponseToPodcast = (
 ): Podcast[] => {
   return podcastServiceResponse.feed.entry.map((entry) => ({
     id: entry.id.attributes["im:id"],
-    title: entry.title.label,
+    title: entry["im:name"].label,
     author: entry["im:artist"].label,
     description: entry.summary.label,
     image: entry["im:image"][2].label,

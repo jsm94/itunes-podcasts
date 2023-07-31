@@ -1,9 +1,10 @@
 * {
-  --app-layout-max-width: 75rem;
+  --app-layout-max-width: 90rem;
 
   /** Colors */
   --color-primary: steelblue;
   --color-secondary: lightgray;
+  --color-gray: #7a7a7a;
 
   /* Headings styles */
   --heading-h1-font-size: 2rem;
