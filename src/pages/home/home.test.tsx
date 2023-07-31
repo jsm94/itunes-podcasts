@@ -1,4 +1,4 @@
-import { render, waitFor } from "@testing-library/react";
+import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 
 import { mockPodcastsListData } from "../../modules/podcasts/infra/mocks/mockPodcastsListData";
 import { Home } from "./home";
@@ -26,5 +26,26 @@ describe("Home", () => {
         getByText(/A History of Rock Music in 500 Songs/i),
       ).toBeInTheDocument();
     });
+  });
+
+  it("should have an input to search for podcasts", async () => {
+    const { getByPlaceholderText } = render(<Home />);
+    await waitFor(() => {
+      expect(getByPlaceholderText(/filter podcasts.../i)).toBeInTheDocument();
+    });
+  });
+
+  it("should filter with a non match word when typing in the input and show nothing", async () => {
+    const { getByPlaceholderText, getByText } = render(<Home />);
+    await waitFor(() => {
+      expect(
+        getByText(/A History of Rock Music in 500 Songs/i),
+      ).toBeInTheDocument();
+    });
+    const input = getByPlaceholderText(/filter podcasts.../i);
+    fireEvent.change(input, { target: { value: "nonmatch" } });
+    expect(
+      screen.queryByText(/A History of Rock Music in 500 Songs/i),
+    ).not.toBeInTheDocument();
   });
 });
