@@ -17,5 +17,6 @@
 .podcasts-container .podcasts-container__filter {
   display: flex;
   justify-content: end;
-  align-items: end;
+  align-items: center;
+  gap: 1rem;
 }

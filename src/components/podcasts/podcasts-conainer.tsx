@@ -4,6 +4,7 @@ import { usePodcasts } from "../../hooks/podcasts/usePodcasts";
 
 import { PodcastCard } from "./podcast-card";
 
+import { Badge } from "../ui/badge";
 import { Input } from "../ui/input";
 import "./podcast-container.css";
 
@@ -37,9 +38,7 @@ export const PodcastsContainer = () => {
   return (
     <div className="podcasts-container">
       <div className="podcasts-container__filter">
-        <span role="status" className="badge">
-          {filteredPodcasts.length}
-        </span>
+        <Badge>{filteredPodcasts.length}</Badge>
         <Input
           type="text"
           placeholder="Filter podcasts..."

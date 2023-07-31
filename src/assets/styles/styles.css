@@ -13,3 +13,6 @@
 
 /* 4. Elements */
 @import "./itcss/04-elements/elements.css";
+
+/* 5. Components */
+@import "./itcss/05-components/components.css";
