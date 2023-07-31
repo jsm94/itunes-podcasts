@@ -4,6 +4,7 @@ import { usePodcasts } from "../../hooks/podcasts/usePodcasts";
 
 import { PodcastCard } from "./podcast-card";
 
+import { Input } from "../ui/input";
 import "./podcast-container.css";
 
 export const PodcastsContainer = () => {
@@ -15,15 +16,17 @@ export const PodcastsContainer = () => {
   }, []);
 
   return (
-    <>
-      <input
-        type="text"
-        placeholder="Filter podcasts..."
-        onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-          setFilter(event.target.value)
-        }
-      />
-      <div className="podcasts-container">
+    <div className="podcasts-container">
+      <div className="podcasts-container__filter">
+        <Input
+          type="text"
+          placeholder="Filter podcasts..."
+          onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+            setFilter(event.target.value)
+          }
+        />
+      </div>
+      <div className="podcasts-container__list">
         {podcasts
           .filter(
             (podcast) =>
@@ -42,6 +45,6 @@ export const PodcastsContainer = () => {
             />
           ))}
       </div>
-    </>
+    </div>
   );
 };
