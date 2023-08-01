@@ -1,0 +1,8 @@
+.podcast-page__container {
+  display: flex;
+  padding: 2rem 0;
+}
+
+.podcast-page__aside {
+  max-width: 20rem;
+}

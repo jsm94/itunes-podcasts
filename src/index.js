@@ -4,7 +4,7 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 
 import { App } from "./App";
 import { Home } from "./pages/home/home";
-import { PodcastPage } from "./pages/podcast/podcast";
+import { PodcastPage } from "./pages/podcast/podcast-page";
 
 import "./assets/styles/styles.css";
 

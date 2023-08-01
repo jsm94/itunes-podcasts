@@ -2,6 +2,7 @@
   --app-layout-max-width: 90rem;
 
   /** Colors */
+  --color-black: black;
   --color-white: white;
   --color-primary: steelblue;
   --color-secondary: lightgray;

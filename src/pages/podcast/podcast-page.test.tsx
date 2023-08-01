@@ -3,7 +3,7 @@ import { waitFor } from "@testing-library/react";
 import { renderWithRouter } from "../../mocks/render-with-providers";
 
 import { mockPodcastsListData } from "../../modules/podcasts/infra/mocks/mockPodcastsListData";
-import { PodcastPage } from "./podcast";
+import { PodcastPage } from "./podcast-page";
 
 const renderPodcastPage = () => {
   return renderWithRouter(<PodcastPage />, {
