@@ -1,6 +1,9 @@
-import { fireEvent, render, screen, waitFor } from "@testing-library/react";
+import { fireEvent, screen, waitFor } from "@testing-library/react";
 
 import { mockPodcastsListData } from "../../modules/podcasts/infra/mocks/mockPodcastsListData";
+
+import { renderWithRouter } from "../../mocks/render-with-providers";
+
 import { Home } from "./home";
 
 describe("Home", () => {
@@ -13,14 +16,14 @@ describe("Home", () => {
   });
 
   it("should render successfully", async () => {
-    const { baseElement } = render(<Home />);
+    const { baseElement } = renderWithRouter(<Home />);
     await waitFor(() => {
       expect(baseElement).toBeTruthy();
     });
   });
 
   it("should have a list of the 100 most popular podcasts", async () => {
-    const { getByText } = render(<Home />);
+    const { getByText } = renderWithRouter(<Home />);
     await waitFor(() => {
       expect(
         getByText(/A History of Rock Music in 500 Songs/i),
@@ -29,14 +32,14 @@ describe("Home", () => {
   });
 
   it("should have an input to search for podcasts", async () => {
-    const { getByPlaceholderText } = render(<Home />);
+    const { getByPlaceholderText } = renderWithRouter(<Home />);
     await waitFor(() => {
       expect(getByPlaceholderText(/filter podcasts.../i)).toBeInTheDocument();
     });
   });
 
   it("should filter with a non match word when typing in the input and show nothing", async () => {
-    const { getByPlaceholderText, getByText } = render(<Home />);
+    const { getByPlaceholderText, getByText } = renderWithRouter(<Home />);
 
     await waitFor(() => {
       expect(
@@ -55,7 +58,9 @@ describe("Home", () => {
   });
 
   it("should show a count of the filtered podcasts", async () => {
-    const { getByRole, getByPlaceholderText, getByText } = render(<Home />);
+    const { getByRole, getByPlaceholderText, getByText } = renderWithRouter(
+      <Home />,
+    );
 
     await waitFor(() => {
       expect(

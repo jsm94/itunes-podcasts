@@ -1,13 +1,15 @@
 import { useEffect, useState } from "react";
 
-import { usePodcasts } from "../../hooks/podcasts/usePodcasts";
-
-import { PodcastCard } from "./podcast-card";
+import { Podcast } from "../../modules/podcasts/domain/Podcast";
 
 import { useDebounceCallback } from "../../hooks/debounce/useDebounceCallback";
-import { Podcast } from "../../modules/podcasts/domain/Podcast";
+import { usePodcasts } from "../../hooks/podcasts/usePodcasts";
+
 import { Badge } from "../ui/badge";
 import { Input } from "../ui/input";
+
+import { PodcastCardLink } from "./podcast-card-link";
+
 import "./podcast-container.css";
 
 export const PodcastsContainer = () => {
@@ -55,7 +57,7 @@ export const PodcastsContainer = () => {
       </div>
       <div className="podcasts-container__list">
         {filteredPodcasts.map((podcast) => (
-          <PodcastCard key={podcast.id} podcast={podcast} />
+          <PodcastCardLink key={podcast.id} podcast={podcast} />
         ))}
       </div>
     </div>

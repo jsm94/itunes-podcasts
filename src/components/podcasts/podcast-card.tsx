@@ -1,4 +1,3 @@
-import { memo } from "react";
 import { Podcast } from "../../modules/podcasts/domain/Podcast";
 
 import "./podcast-card.css";
@@ -8,11 +7,12 @@ type PodcastCardProps = {
   podcast: Podcast;
 };
 
-export const PodcastCard = memo(({ className, podcast }: PodcastCardProps) => {
+export const PodcastCard = ({ className, podcast }: PodcastCardProps) => {
   return (
     <div className={["podcast-card", className].join(" ")}>
       <div className="podcast-card__content">
         <img
+          loading="lazy"
           className="podcast-card__image"
           src={podcast.image}
           alt={podcast.title}
@@ -22,6 +22,6 @@ export const PodcastCard = memo(({ className, podcast }: PodcastCardProps) => {
       </div>
     </div>
   );
-});
+};
 
 PodcastCard.displayName = "PodcastCard";

@@ -22,6 +22,7 @@ module.exports = (env, argv) => {
     output: {
       filename: isProduction ? "[name].[contenthash].js" : "[name].js",
       path: path.resolve(__dirname, "build"),
+      publicPath: "/",
     },
     plugins: [
       new HtmlWebpackPlugin({
@@ -33,6 +34,9 @@ module.exports = (env, argv) => {
     },
     resolve: {
       extensions: [".ts", ".tsx", ".js", ".jsx"],
+    },
+    devServer: {
+      historyApiFallback: true,
     },
   };
 };
