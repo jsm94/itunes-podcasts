@@ -1,3 +1,4 @@
+import { memo } from "react";
 import { Podcast } from "../../modules/podcasts/domain/Podcast";
 
 import "./podcast-card.css";
@@ -5,16 +6,11 @@ import "./podcast-card.css";
 type PodcastCardProps = {
   className?: string;
   podcast: Podcast;
-  onClick: () => void;
 };
 
-export const PodcastCard = ({
-  className,
-  podcast,
-  onClick,
-}: PodcastCardProps) => {
+export const PodcastCard = memo(({ className, podcast }: PodcastCardProps) => {
   return (
-    <div className={["podcast-card", className].join(" ")} onClick={onClick}>
+    <div className={["podcast-card", className].join(" ")}>
       <div className="podcast-card__content">
         <img
           className="podcast-card__image"
@@ -26,4 +22,6 @@ export const PodcastCard = ({
       </div>
     </div>
   );
-};
+});
+
+PodcastCard.displayName = "PodcastCard";
