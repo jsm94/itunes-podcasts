@@ -3,6 +3,7 @@ import { createRoot } from "react-dom/client";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 
 import { App } from "./App";
+import { PodcastEpisodesListContainer } from "./components/podcasts/podcast-episodes-list-container";
 import { Home } from "./pages/home/home";
 import { PodcastPage } from "./pages/podcast/podcast-page";
 
@@ -20,6 +21,16 @@ const router = createBrowserRouter([
       {
         path: "/podcast/:podcastId",
         element: <PodcastPage />,
+        children: [
+          {
+            path: "/podcast/:podcastId",
+            element: <PodcastEpisodesListContainer />,
+          },
+          {
+            path: "/podcast/:podcastId/episode/:episodeId",
+            element: <>episode</>,
+          },
+        ],
       },
     ],
   },

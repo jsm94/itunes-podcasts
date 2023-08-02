@@ -2,6 +2,8 @@ import { waitFor } from "@testing-library/react";
 
 import { renderWithRouter } from "../../mocks/render-with-providers";
 
+import { Route } from "react-router";
+import { PodcastEpisodesListContainer } from "../../components/podcasts/podcast-episodes-list-container";
 import { mockEpisodesListData } from "../../modules/podcasts/infra/mocks/mockEpisodesListData";
 import { mockPodcastsListData } from "../../modules/podcasts/infra/mocks/mockPodcastsListData";
 import { PodcastPage } from "./podcast-page";
@@ -10,6 +12,13 @@ const renderPodcastPage = () => {
   return renderWithRouter(<PodcastPage />, {
     route: "/podcast/1437402802", // "A History of Rock Music in 500 Songs" mocked id
     path: "/podcast/:podcastId",
+    children: [
+      <Route
+        key={1}
+        path="/podcast/:podcastId"
+        element={<PodcastEpisodesListContainer />}
+      />,
+    ],
   });
 };
 
