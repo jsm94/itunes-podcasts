@@ -26,14 +26,22 @@ export const PodcastEpisodesListContainer = () => {
 
   return (
     <>
-      <Card>
-        <h2 className="podcast-page__episodes-title">
-          Episodes: {episodes?.length}
-        </h2>
-      </Card>
-      <Card>
-        <PodcastEpisodesList episodes={episodes} />
-      </Card>
+      {episodes?.length ? (
+        <Card>
+          <h2 className="podcast-page__episodes-title">
+            Episodes: {episodes?.length}
+          </h2>
+        </Card>
+      ) : (
+        <div className="podcast-page__episode-title--skeleton skeleton-box" />
+      )}
+      {episodes?.length ? (
+        <Card>
+          <PodcastEpisodesList episodes={episodes} />
+        </Card>
+      ) : (
+        <div className="podcast-page__episode-list--skeleton skeleton-box" />
+      )}
     </>
   );
 };

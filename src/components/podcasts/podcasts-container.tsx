@@ -13,6 +13,7 @@ import { usePodcasts } from "../../hooks/podcasts/usePodcasts";
 import { Badge } from "../ui/badge";
 import { Input } from "../ui/input";
 
+import { PodcastCardSkeleton } from "./podcast-card";
 import { PodcastCardLink } from "./podcast-card-link";
 
 import "./podcast-container.css";
@@ -68,7 +69,17 @@ export const PodcastsContainer = () => {
         {filteredPodcasts.map((podcast) => (
           <PodcastCardLink key={podcast.id} podcast={podcast} />
         ))}
+        {filteredPodcasts.length === 0 && <PodcastsContainerSkeletons />}
       </div>
     </div>
   );
 };
+
+const PodcastsContainerSkeletons = () => (
+  <>
+    <PodcastCardSkeleton />
+    <PodcastCardSkeleton />
+    <PodcastCardSkeleton />
+    <PodcastCardSkeleton />
+  </>
+);

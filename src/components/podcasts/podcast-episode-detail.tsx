@@ -31,21 +31,25 @@ export const PodcastEpisodeDetail = () => {
 
   return (
     <div className="podcast-episode-detail">
-      <Card>
-        <h2>{episode?.title}</h2>
-        <div
-          className="podcast-episode-detail__description"
-          dangerouslySetInnerHTML={{
-            __html: parseTextToHtml(episode?.description),
-          }}
-        />
-        <hr />
-        <audio
-          className="podcast-episode-detail__audio-controls"
-          controls
-          src={episode?.audio}
-        />
-      </Card>
+      {episode ? (
+        <Card>
+          <h2>{episode?.title}</h2>
+          <div
+            className="podcast-episode-detail__description"
+            dangerouslySetInnerHTML={{
+              __html: parseTextToHtml(episode?.description),
+            }}
+          />
+          <hr />
+          <audio
+            className="podcast-episode-detail__audio-controls"
+            controls
+            src={episode?.audio}
+          />
+        </Card>
+      ) : (
+        <div className="podcast-episode-detail__skeleton skeleton-box" />
+      )}
     </div>
   );
 };

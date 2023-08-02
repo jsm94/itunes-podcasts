@@ -12,6 +12,7 @@ import { usePodcasts } from "../../hooks/podcasts/usePodcasts";
 
 import { PodcastCardDetail } from "../../components/podcasts/podcast-card-detail";
 
+import { PodcastCardSkeleton } from "../../components/podcasts/podcast-card";
 import "./podcast-page.css";
 
 export const PodcastPage = () => {
@@ -37,6 +38,7 @@ export const PodcastPage = () => {
       <div className="podcast-page__container">
         <aside className="podcast-page__aside">
           {podcast && <PodcastCardDetail podcast={podcast} />}
+          {!podcast && <PodcastCardSkeleton />}
         </aside>
         <section className="podcast-page__section">
           <Outlet />

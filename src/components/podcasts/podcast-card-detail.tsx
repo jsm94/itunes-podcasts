@@ -17,6 +17,7 @@ export const PodcastCardDetail = ({
     <Card className={["podcast-card-detail", className].join(" ")}>
       <div className="podcast-card-detail__image-container">
         <img
+          loading="lazy"
           className="podcast-card-detail__image"
           src={podcast?.image}
           alt={podcast?.title}

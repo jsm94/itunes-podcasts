@@ -25,3 +25,7 @@ export const PodcastCard = ({ className, podcast }: PodcastCardProps) => {
 };
 
 PodcastCard.displayName = "PodcastCard";
+
+export const PodcastCardSkeleton = () => {
+  return <div className="skeleton-box podcast-card--skeleton" />;
+};
