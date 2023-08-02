@@ -2,6 +2,11 @@ import { useEffect, useState } from "react";
 
 import { Podcast } from "../../modules/podcasts/domain/Podcast";
 
+import {
+  LoadingActionTypes,
+  useLoadingDispatch,
+} from "../../context/LoadingContext";
+
 import { useDebounceCallback } from "../../hooks/debounce/useDebounceCallback";
 import { usePodcasts } from "../../hooks/podcasts/usePodcasts";
 
@@ -16,6 +21,7 @@ export const PodcastsContainer = () => {
   const { podcasts, getPodcasts } = usePodcasts();
   const [filter, setFilter] = useState("");
   const [filteredPodcasts, setFilteredPodcasts] = useState(podcasts);
+  const dispatch = useLoadingDispatch();
 
   const _filterPodcasts = (podcastsToFilter: Podcast[]) => {
     return podcastsToFilter.filter(
@@ -32,7 +38,10 @@ export const PodcastsContainer = () => {
   }, 500);
 
   useEffect(() => {
-    getPodcasts();
+    dispatch({ type: LoadingActionTypes.PUSH });
+    getPodcasts().then(() => {
+      dispatch({ type: LoadingActionTypes.POP });
+    });
   }, []);
 
   useEffect(() => {

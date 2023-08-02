@@ -65,7 +65,7 @@ URL: `/podcast/{podcastId}/episode/{episodeId}`
 ### Header
 
 - [x] The application title is a link that navigates to main view.
-- [ ] There should be an indicator that only appears while navigating through views to show that a transition is running.
+- [x] There should be an indicator that only appears while navigating through views to show that a transition is running.
 
 ---
 

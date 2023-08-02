@@ -1,15 +1,27 @@
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
+
+import {
+  LoadingActionTypes,
+  useLoadingDispatch,
+} from "../../context/LoadingContext";
+
 import { usePodcasts } from "../../hooks/podcasts/usePodcasts";
+
 import { Card } from "../card/card";
+
 import { PodcastEpisodesList } from "./podcast-episodes-list";
 
 export const PodcastEpisodesListContainer = () => {
   const { getEpisodes, episodes } = usePodcasts();
   const { podcastId } = useParams<{ podcastId: string }>();
+  const dispatch = useLoadingDispatch();
 
   useEffect(() => {
-    getEpisodes(podcastId!);
+    dispatch({ type: LoadingActionTypes.PUSH });
+    getEpisodes(podcastId!).then(() => {
+      dispatch({ type: LoadingActionTypes.POP });
+    });
   }, []);
 
   return (

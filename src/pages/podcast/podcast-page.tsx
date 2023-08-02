@@ -1,6 +1,11 @@
 import { useEffect, useState } from "react";
 import { Outlet, useParams } from "react-router-dom";
 
+import {
+  LoadingActionTypes,
+  useLoadingDispatch,
+} from "../../context/LoadingContext";
+
 import { Podcast } from "../../modules/podcasts/domain/Podcast";
 
 import { usePodcasts } from "../../hooks/podcasts/usePodcasts";
@@ -13,9 +18,13 @@ export const PodcastPage = () => {
   const [podcast, setPodcast] = useState<Podcast | undefined>(undefined);
   const { getPodcasts, podcasts } = usePodcasts();
   const { podcastId } = useParams<{ podcastId: string }>();
+  const dispatch = useLoadingDispatch();
 
   useEffect(() => {
-    getPodcasts();
+    dispatch({ type: LoadingActionTypes.PUSH });
+    getPodcasts().then(() => {
+      dispatch({ type: LoadingActionTypes.POP });
+    });
   }, []);
 
   useEffect(() => {

@@ -1,0 +1,21 @@
+@keyframes pulse {
+  from {
+    opacity: 1;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0.25;
+    transform: scale(0.75);
+  }
+}
+
+.pulse-bubble {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: var(--color-primary);
+}
+
+.pulse-bubble-animation {
+  animation: pulse 0.4s ease 0s infinite alternate;
+}

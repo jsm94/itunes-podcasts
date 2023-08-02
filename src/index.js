@@ -2,6 +2,8 @@ import { createRoot } from "react-dom/client";
 
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 
+import { LoadingProvider } from "./context/LoadingContext";
+
 import { App } from "./App";
 import { Home } from "./pages/home/home";
 import { PodcastPage } from "./pages/podcast/podcast-page";
@@ -38,5 +40,13 @@ const router = createBrowserRouter([
   },
 ]);
 
+const withProviders = () => {
+  return (
+    <LoadingProvider>
+      <RouterProvider router={router} />
+    </LoadingProvider>
+  );
+};
+
 const root = createRoot(document.getElementById("root"));
-root.render(<RouterProvider router={router} />);
+root.render(withProviders());
