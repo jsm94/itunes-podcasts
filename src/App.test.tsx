@@ -1,5 +1,6 @@
-import { render, waitFor } from "@testing-library/react";
+import { waitFor } from "@testing-library/react";
 import { App } from "./App";
+import { renderWithRouter } from "./mocks/render-with-providers";
 import { mockPodcastsListData } from "./modules/podcasts/infra/mocks/mockPodcastsListData";
 
 describe("App", () => {
@@ -12,7 +13,7 @@ describe("App", () => {
   });
 
   it("renders without crashing", () => {
-    const { container } = render(<App />);
+    const { container } = renderWithRouter(<App />);
 
     waitFor(() => {
       expect(container.firstChild).toBeInTheDocument();
@@ -20,7 +21,7 @@ describe("App", () => {
   });
 
   it("renders the header with the text 'Podcaster'", () => {
-    const { getByRole } = render(<App />);
+    const { getByRole } = renderWithRouter(<App />);
     const header = getByRole("heading", { name: /podcaster/i });
 
     waitFor(() => {

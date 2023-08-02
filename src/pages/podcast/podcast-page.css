@@ -1,8 +1,13 @@
 .podcast-page__container {
   display: flex;
   padding: 2rem 0;
+  gap: 6rem;
 }
 
 .podcast-page__aside {
   max-width: 20rem;
+}
+
+.podcast-page__section {
+  flex: 1;
 }

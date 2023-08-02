@@ -2,6 +2,7 @@ import { waitFor } from "@testing-library/react";
 
 import { renderWithRouter } from "../../mocks/render-with-providers";
 
+import { mockEpisodesListData } from "../../modules/podcasts/infra/mocks/mockEpisodesListData";
 import { mockPodcastsListData } from "../../modules/podcasts/infra/mocks/mockPodcastsListData";
 import { PodcastPage } from "./podcast-page";
 
@@ -14,11 +15,19 @@ const renderPodcastPage = () => {
 
 describe("Podcast", () => {
   beforeAll(() => {
-    global.fetch = jest.fn(() =>
-      Promise.resolve({
-        json: () => Promise.resolve(mockPodcastsListData),
-      }),
-    ) as jest.Mock<Promise<Response>>;
+    global.fetch = jest.fn((url) => {
+      if (
+        url ===
+        "https://itunes.apple.com/us/rss/toppodcasts/limit=100/genre=1310/json"
+      ) {
+        return Promise.resolve({
+          json: () => Promise.resolve(mockPodcastsListData),
+        });
+      }
+      return Promise.resolve({
+        json: () => Promise.resolve(mockEpisodesListData),
+      });
+    }) as jest.Mock<Promise<Response>>;
   });
 
   it("should render successfully", async () => {
@@ -34,6 +43,20 @@ describe("Podcast", () => {
       expect(
         getByText(/A History of Rock Music in 500 Songs/i),
       ).toBeInTheDocument();
+    });
+  });
+
+  it("show a number of episodes", async () => {
+    const { getByText } = renderPodcastPage();
+    await waitFor(() => {
+      expect(getByText(/episodes: 1/i)).toBeInTheDocument();
+    });
+  });
+
+  it("should have a list of episodes", async () => {
+    const { getByText } = renderPodcastPage();
+    await waitFor(() => {
+      expect(getByText(/Bakar - Hell N Back/i)).toBeInTheDocument();
     });
   });
 });

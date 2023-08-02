@@ -6,7 +6,11 @@ export const useLocalStorage = <T,>() => {
     value: T,
     expirationTime = defaultExpirationTime,
   ) => {
-    localStorage.setItem(key, JSON.stringify(value));
+    if (value instanceof Map) {
+      localStorage.setItem(key, JSON.stringify([...value]));
+    } else {
+      localStorage.setItem(key, JSON.stringify(value));
+    }
     localStorage.setItem(
       `${key}_exp`,
       JSON.stringify(Date.now() + expirationTime),

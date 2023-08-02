@@ -34,7 +34,9 @@ export class ApiPodcastService implements PodcastRepository {
 
   async getEpisodes(id: string): Promise<Episode[]> {
     const response = await fetch(
-      `${proxyUrl}https://itunes.apple.com/lookup?id=${id}&media=podcast&entity=podcastEpisode`,
+      `${proxyUrl}${encodeURIComponent(
+        `https://itunes.apple.com/lookup?id=${id}&media=podcast&entity=podcastEpisode`,
+      )}`,
       {
         method: "GET",
       },
