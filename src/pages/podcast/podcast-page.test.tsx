@@ -1,8 +1,8 @@
 import { waitFor } from "@testing-library/react";
+import { Route } from "react-router";
 
 import { renderWithRouter } from "../../mocks/render-with-providers";
 
-import { Route } from "react-router";
 import { PodcastEpisodesListContainer } from "../../components/podcasts/podcast-episodes-list-container";
 import { mockEpisodesListData } from "../../modules/podcasts/infra/mocks/mockEpisodesListData";
 import { mockPodcastsListData } from "../../modules/podcasts/infra/mocks/mockPodcastsListData";
@@ -17,6 +17,11 @@ const renderPodcastPage = () => {
         key={1}
         path="/podcast/:podcastId"
         element={<PodcastEpisodesListContainer />}
+      />,
+      <Route
+        key={1}
+        path="/podcast/:podcastId/episode/:episodeId"
+        element={<h1>Bakar - Hell N Back</h1>}
       />,
     ],
   });
@@ -66,6 +71,20 @@ describe("Podcast", () => {
     const { getByText } = renderPodcastPage();
     await waitFor(() => {
       expect(getByText(/Bakar - Hell N Back/i)).toBeInTheDocument();
+    });
+  });
+
+  it("when click on episode should redirect to episode page", async () => {
+    const { getByText, getByRole } = renderPodcastPage();
+
+    await waitFor(() => {
+      getByText(/Bakar - Hell N Back/i).click();
+    });
+
+    await waitFor(() => {
+      expect(
+        getByRole("heading", { name: /Bakar - Hell N Back/i }),
+      ).toBeInTheDocument();
     });
   });
 });
