@@ -13,8 +13,8 @@ const KEY_EPISODES = "episodes";
 type Element = Podcast[] | Episode[];
 
 export const usePodcasts = () => {
-  const [podcasts, setPodcasts] = useState<Element>([]);
-  const [episodes, setEpisodes] = useState<Element>([]);
+  const [podcasts, setPodcasts] = useState<Podcast[]>([]);
+  const [episodes, setEpisodes] = useState<Episode[]>([]);
   const { setItem, getItem } = useLocalStorage<
     Element | Map<string, Episode[]>
   >();

@@ -9,5 +9,8 @@
 }
 
 .podcast-page__section {
+  display: flex;
+  flex-direction: column;
   flex: 1;
+  gap: 2rem;
 }

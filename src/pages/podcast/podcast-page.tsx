@@ -7,6 +7,8 @@ import { usePodcasts } from "../../hooks/podcasts/usePodcasts";
 
 import { Card } from "../../components/card/card";
 import { PodcastCardDetail } from "../../components/podcasts/podcast-card-detail";
+import { PodcastEpisodesList } from "../../components/podcasts/podcast-episodes-list";
+
 import "./podcast-page.css";
 
 export const PodcastPage = () => {
@@ -20,9 +22,7 @@ export const PodcastPage = () => {
   }, []);
 
   useEffect(() => {
-    const podcast = (podcasts as Podcast[]).find(
-      (podcast) => podcast.id === podcastId,
-    );
+    const podcast = podcasts.find((podcast) => podcast.id === podcastId);
     setPodcast(podcast);
   }, [podcasts]);
 
@@ -39,9 +39,7 @@ export const PodcastPage = () => {
             </h2>
           </Card>
           <Card>
-            {episodes?.map((episode) => (
-              <div key={episode.id}>{episode.title}</div>
-            ))}
+            <PodcastEpisodesList episodes={episodes} />
           </Card>
         </section>
       </div>
