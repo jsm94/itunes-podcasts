@@ -41,16 +41,16 @@ URL: `/`
 - [x] The list results should be cached for 1 day to not make the API call again while cached.
 - [x] The users could filter the podcast list by writing on the input search. The string should match with podcast title and/or author's name.
 - [x] The list should react immediately with the filter while typing.
-- [ ] Click on a podcast should navigate to the podcast detail view.
+- [x] Click on a podcast should navigate to the podcast detail view.
 
 ### Podcast detail
 
 URL: `/podcast/{podcastId}`
 
-- [ ] Should show a sidebar with the podcast image, title, author and description. According to this endpoint:
+- [x] Should show a sidebar with the podcast image, title, author and description. According to this endpoint:
       `https://itunes.apple.com/lookup?id=934552872&media=podcast&entity=podcastEpisode&limit=20`
-- [ ] Should show a main section with the total number of episodes and the list of them with its title, release date and duration.
-- [ ] The podcast detail should be cached for 1 day to not make the API call again while cached.
+- [x] Should show a main section with the total number of episodes and the list of them with its title, release date and duration.
+- [x] The podcast detail should be cached for 1 day to not make the API call again while cached.
 - [ ] Click on the episode title should navigate to the episode detail view.
 
 > Service for external resources that not allow JSON neither CORS headers: `https://allorigins.win`
@@ -59,12 +59,12 @@ URL: `/podcast/{podcastId}`
 
 URL: `/podcast/{podcastId}/episode/{episodeId}`
 
-- [ ] Should show the same sidebar from the previous view. The podcast title and author should be links to the podcast detail view.
+- [x] Should show the same sidebar from the previous view. The podcast title and author should be links to the podcast detail view.
 - [ ] Should show a main section with the episode title, description and an HTML5 audio player to play the podcast. The HTML descriptions should be interpreted not escaped.
 
 ### Header
 
-- [ ] The application title is a link that navigates to main view.
+- [x] The application title is a link that navigates to main view.
 - [ ] There should be an indicator that only appears while navigating through views to show that a transition is running.
 
 ---
