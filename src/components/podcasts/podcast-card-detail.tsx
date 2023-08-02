@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { Podcast } from "../../modules/podcasts/domain/Podcast";
 
 import { Card } from "../card/card";
@@ -25,7 +26,9 @@ export const PodcastCardDetail = ({
       </div>
       <hr />
       <div className="podcast-card-detail__info">
-        <h1 className="podcast-card-detail__title">{podcast?.title}</h1>
+        <Link className="no-style" to={`/podcast/${podcast?.id}`}>
+          <h1 className="podcast-card-detail__title">{podcast?.title}</h1>
+        </Link>
         <p className="podcast-card-detail__author">by {podcast?.author}</p>
       </div>
       <hr />
