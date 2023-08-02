@@ -69,7 +69,14 @@ export const PodcastsContainer = () => {
         {filteredPodcasts.map((podcast) => (
           <PodcastCardLink key={podcast.id} podcast={podcast} />
         ))}
-        {filteredPodcasts.length === 0 && <PodcastsContainerSkeletons />}
+        {filteredPodcasts.length === 0 && !filter && (
+          <PodcastsContainerSkeletons />
+        )}
+        {filteredPodcasts.length === 0 && filter && (
+          <p>
+            No podcasts found for filter: <b>{filter}</b>
+          </p>
+        )}
       </div>
     </div>
   );
