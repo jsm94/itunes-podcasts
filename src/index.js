@@ -3,9 +3,11 @@ import { createRoot } from "react-dom/client";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 
 import { App } from "./App";
-import { PodcastEpisodesListContainer } from "./components/podcasts/podcast-episodes-list-container";
 import { Home } from "./pages/home/home";
 import { PodcastPage } from "./pages/podcast/podcast-page";
+
+import { PodcastEpisodeDetail } from "./components/podcasts/podcast-episode-detail";
+import { PodcastEpisodesListContainer } from "./components/podcasts/podcast-episodes-list-container";
 
 import "./assets/styles/styles.css";
 
@@ -28,7 +30,7 @@ const router = createBrowserRouter([
           },
           {
             path: "/podcast/:podcastId/episode/:episodeId",
-            element: <>episode</>,
+            element: <PodcastEpisodeDetail />,
           },
         ],
       },

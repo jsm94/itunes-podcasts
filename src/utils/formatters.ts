@@ -12,3 +12,18 @@ export const msToDuration = (ms: number | undefined): string => {
     hoursStr === "00" ? "" : `${hoursStr}:`
   }${minutesStr}:${secondsStr}`;
 };
+
+export const parseBreakLinesToHtml = (text: string | undefined) =>
+  text ? text.replace(/\n/g, "<br />") : "";
+
+export const parseUrlToHtml = (text: string | undefined) =>
+  text
+    ? text.replace(
+        /(https?:\/\/[^\s]+)/g,
+        "<a target='_blank' href='$1'>$1</a>",
+      )
+    : "";
+
+export const parseTextToHtml = (text: string | undefined) => {
+  return parseBreakLinesToHtml(parseUrlToHtml(text));
+};
