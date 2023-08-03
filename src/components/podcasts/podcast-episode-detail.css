@@ -1,3 +1,7 @@
+.podcast-episode-detail__title {
+  margin-top: 0;
+}
+
 .podcast-episode-detail__description {
   font-style: italic;
 }

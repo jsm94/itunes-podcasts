@@ -33,7 +33,7 @@ export const PodcastEpisodeDetail = () => {
     <div className="podcast-episode-detail">
       {episode ? (
         <Card>
-          <h2>{episode?.title}</h2>
+          <h2 className="podcast-episode-detail__title">{episode?.title}</h2>
           <div
             className="podcast-episode-detail__description"
             dangerouslySetInnerHTML={{
