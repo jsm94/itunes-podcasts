@@ -9,6 +9,7 @@ import { useLocalStorage } from "../localStorage/useLocalStorage";
 
 const KEY_PODCASTS = "podcasts";
 const KEY_EPISODES = "episodes";
+const NUMBER_OF_PODCASTS = 100;
 
 type Element = Podcast[] | Episode[];
 
@@ -37,7 +38,9 @@ export const usePodcasts = () => {
     );
 
     try {
-      const response = await podcastApi.getMostPopularPodcasts(100);
+      const response = await podcastApi.getMostPopularPodcasts(
+        NUMBER_OF_PODCASTS,
+      );
       setItem(KEY_PODCASTS, response);
       return response;
     } catch (error) {
@@ -49,10 +52,6 @@ export const usePodcasts = () => {
     const cachedEpisodes = new Map<string, Episode[]>(
       getItem(KEY_EPISODES) as Map<string, Episode[]>,
     );
-
-    // if (cachedEpisodes.size === 0) {
-    //   cachedEpisodes = new Map<string, Episode[]>();
-    // }
 
     if (cachedEpisodes?.has(podcastId)) {
       return cachedEpisodes.get(podcastId);
