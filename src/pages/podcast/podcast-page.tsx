@@ -29,6 +29,7 @@ export const PodcastPage = () => {
     const podcast = podcasts?.find((podcast) => podcast.id === podcastId);
     if (!podcast) {
       navigate("/404");
+      dispatch({ type: LoadingActionTypes.POP });
       return;
     }
     setPodcast(podcast);
