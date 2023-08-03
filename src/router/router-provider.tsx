@@ -1,3 +1,4 @@
+import { StrictMode } from "react";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 
 import { ROUTES } from "../constants/app.constants";
@@ -47,8 +48,10 @@ const router = (parentElement: React.ReactNode) =>
 
 export const withProviders = (parentElement: React.ReactNode) => {
   return (
-    <LoadingProvider>
-      <RouterProvider router={router(parentElement)} />
-    </LoadingProvider>
+    <StrictMode>
+      <LoadingProvider>
+        <RouterProvider router={router(parentElement)} />
+      </LoadingProvider>
+    </StrictMode>
   );
 };
