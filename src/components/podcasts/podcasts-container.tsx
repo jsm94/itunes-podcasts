@@ -40,7 +40,7 @@ export const PodcastsContainer = () => {
 
   useEffect(() => {
     dispatch({ type: LoadingActionTypes.PUSH });
-    getPodcasts().then(() => {
+    getPodcasts().finally(() => {
       dispatch({ type: LoadingActionTypes.POP });
     });
   }, []);

@@ -20,28 +20,44 @@ const podcastLimit = (limit: number) => {
 };
 
 export class ApiPodcastService implements PodcastRepository {
+  abortController: AbortController;
+
+  constructor(abortController: AbortController) {
+    this.abortController = abortController;
+  }
+
   async getMostPopular(limit: number): Promise<Podcast[]> {
     podcastLimit(limit);
-    const response = await fetch(
-      `https://itunes.apple.com/us/rss/toppodcasts/limit=${limit}/genre=1310/json`,
-      {
-        method: "GET",
-      },
-    );
-    const data = (await response.json()) as ApiPodcastServiceResponse;
-    return mapperPodcastServiceResponseToPodcast(data);
+    try {
+      const response = await fetch(
+        `https://itunes.apple.com/us/rss/toppodcasts/limit=${limit}/genre=1310/json`,
+        {
+          method: "GET",
+          signal: this.abortController.signal,
+        },
+      );
+      const data = (await response.json()) as ApiPodcastServiceResponse;
+      return mapperPodcastServiceResponseToPodcast(data);
+    } catch (error) {
+      throw new Error("Error fetching podcasts");
+    }
   }
 
   async getEpisodes(id: string): Promise<Episode[]> {
-    const response = await fetch(
-      `${proxyUrl}${encodeURIComponent(
-        `https://itunes.apple.com/lookup?id=${id}&media=podcast&entity=podcastEpisode`,
-      )}`,
-      {
-        method: "GET",
-      },
-    );
-    const data = (await response.json()) as ApiEpisodesServiceResponse;
-    return mapperEpisodesServiceResponseToEpisode(data);
+    try {
+      const response = await fetch(
+        `${proxyUrl}${encodeURIComponent(
+          `https://itunes.apple.com/lookup?id=${id}&media=podcast&entity=podcastEpisode`,
+        )}`,
+        {
+          method: "GET",
+          signal: this.abortController.signal,
+        },
+      );
+      const data = (await response.json()) as ApiEpisodesServiceResponse;
+      return mapperEpisodesServiceResponseToEpisode(data);
+    } catch (error) {
+      throw new Error("Error fetching episodes");
+    }
   }
 }

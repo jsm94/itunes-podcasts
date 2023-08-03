@@ -23,7 +23,7 @@ export const PodcastPage = () => {
 
   useEffect(() => {
     dispatch({ type: LoadingActionTypes.PUSH });
-    getPodcasts().then(() => {
+    getPodcasts().finally(() => {
       dispatch({ type: LoadingActionTypes.POP });
     });
   }, []);

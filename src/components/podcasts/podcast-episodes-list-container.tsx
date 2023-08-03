@@ -19,7 +19,7 @@ export const PodcastEpisodesListContainer = () => {
 
   useEffect(() => {
     dispatch({ type: LoadingActionTypes.PUSH });
-    getEpisodes(podcastId!).then(() => {
+    getEpisodes(podcastId!).finally(() => {
       dispatch({ type: LoadingActionTypes.POP });
     });
   }, []);

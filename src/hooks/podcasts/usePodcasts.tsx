@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import { PodcastService } from "../../modules/podcasts/application/PodcastService";
 import { Episode } from "../../modules/podcasts/domain/Episode";
@@ -19,16 +19,33 @@ export const usePodcasts = () => {
     Element | Map<string, Episode[]>
   >();
 
+  const abortController = useRef(new AbortController());
+
+  useEffect(() => {
+    abortController.current = new AbortController();
+
+    return () => {
+      abortController.current.abort();
+    };
+  }, []);
+
   const getPodcasts = async () => {
     const cachedPodcasts = getItem(KEY_PODCASTS) as Podcast[];
     if (cachedPodcasts?.length) {
       setPodcasts(cachedPodcasts);
       return;
     }
-    const podcastApi = new PodcastService(new ApiPodcastService());
-    const response = await podcastApi.getMostPopularPodcasts(100);
-    setItem(KEY_PODCASTS, response);
-    setPodcasts(response);
+    const podcastApi = new PodcastService(
+      new ApiPodcastService(abortController.current),
+    );
+
+    try {
+      const response = await podcastApi.getMostPopularPodcasts(100);
+      setItem(KEY_PODCASTS, response);
+      setPodcasts(response);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const getEpisodes = async (podcastId: string) => {
@@ -45,11 +62,18 @@ export const usePodcasts = () => {
       return;
     }
 
-    const podcastApi = new PodcastService(new ApiPodcastService());
-    const response = await podcastApi.getEpisodesByPodcastId(podcastId);
-    cachedEpisodes?.set(podcastId, response);
-    setItem(KEY_EPISODES, cachedEpisodes);
-    setEpisodes(response);
+    const podcastApi = new PodcastService(
+      new ApiPodcastService(abortController.current),
+    );
+
+    try {
+      const response = await podcastApi.getEpisodesByPodcastId(podcastId);
+      cachedEpisodes?.set(podcastId, response);
+      setItem(KEY_EPISODES, cachedEpisodes);
+      setEpisodes(response);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return {
