@@ -1,17 +1,20 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
-import { usePodcasts } from "../../hooks/podcasts/usePodcasts";
 import { Episode } from "../../modules/podcasts/domain/Episode";
 
-import { Card } from "../card/card";
+import { ROUTES } from "../../constants/app.constants";
+
+import { usePodcasts } from "../../hooks/podcasts/usePodcasts";
 
 import { parseTextToHtml } from "../../utils/formatters";
+
+import { Card } from "../card/card";
 
 import {
   LoadingActionTypes,
   useLoadingDispatch,
-} from "../../context/LoadingContext";
+} from "../../context/loading-context";
 import "./podcast-episode-detail.css";
 
 export const PodcastEpisodeDetail = () => {
@@ -32,7 +35,7 @@ export const PodcastEpisodeDetail = () => {
       (episode) => episode.id === Number(episodeId),
     );
     if (!episode) {
-      navigate("/404");
+      navigate(ROUTES.NOT_FOUND);
       dispatch({ type: LoadingActionTypes.POP });
       return;
     }

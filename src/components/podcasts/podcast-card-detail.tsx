@@ -3,6 +3,7 @@ import { Podcast } from "../../modules/podcasts/domain/Podcast";
 
 import { Card } from "../card/card";
 
+import { ROUTES } from "../../constants/app.constants";
 import "./podcast-card-detail.css";
 
 type PodcastCardDetailProps = {
@@ -26,7 +27,7 @@ export const PodcastCardDetail = ({
       </div>
       <hr />
       <div className="podcast-card-detail__info">
-        <Link className="no-style" to={`/podcast/${podcast?.id}`}>
+        <Link className="no-style" to={`${ROUTES.PODCAST}/${podcast?.id}`}>
           <h1 className="podcast-card-detail__title">{podcast?.title}</h1>
         </Link>
         <p className="podcast-card-detail__author">by {podcast?.author}</p>

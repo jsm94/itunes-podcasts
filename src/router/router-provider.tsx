@@ -1,6 +1,8 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 
-import { LoadingProvider } from "../context/LoadingContext";
+import { ROUTES } from "../constants/app.constants";
+
+import { LoadingProvider } from "../context/loading-context";
 
 import { ErrorBoundary } from "../components/error-boundary";
 import { PodcastEpisodeDetail } from "../components/podcasts/podcast-episode-detail";
@@ -13,28 +15,28 @@ import { PodcastPage } from "../pages/podcast/podcast-page";
 const router = (parentElement: React.ReactNode) =>
   createBrowserRouter([
     {
-      path: "/",
+      path: ROUTES.HOME,
       element: parentElement,
       ErrorBoundary: ErrorBoundary,
       children: [
         {
-          path: "/",
+          path: ROUTES.HOME,
           element: <Home />,
         },
         {
-          path: "/404",
+          path: ROUTES.NOT_FOUND,
           element: <NotFoundPage />,
         },
         {
-          path: "/podcast/:podcastId",
+          path: ROUTES.PODCAST_DETAIL,
           element: <PodcastPage />,
           children: [
             {
-              path: "/podcast/:podcastId",
+              path: ROUTES.PODCAST_DETAIL,
               element: <PodcastEpisodesListContainer />,
             },
             {
-              path: "/podcast/:podcastId/episode/:episodeId",
+              path: ROUTES.PODCAST_EPISODE_DETAIL,
               element: <PodcastEpisodeDetail />,
             },
           ],

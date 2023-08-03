@@ -6,7 +6,7 @@ import { Episode } from "../../modules/podcasts/domain/Episode";
 import {
   LoadingActionTypes,
   useLoadingDispatch,
-} from "../../context/LoadingContext";
+} from "../../context/loading-context";
 
 import { usePodcasts } from "../../hooks/podcasts/usePodcasts";
 

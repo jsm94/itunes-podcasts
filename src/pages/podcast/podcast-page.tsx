@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
 import { Outlet, useNavigate, useParams } from "react-router-dom";
 
+import { ROUTES } from "../../constants/app.constants";
+
 import {
   LoadingActionTypes,
   useLoadingDispatch,
-} from "../../context/LoadingContext";
+} from "../../context/loading-context";
 
 import { Podcast } from "../../modules/podcasts/domain/Podcast";
 
@@ -28,7 +30,7 @@ export const PodcastPage = () => {
     const podcasts = await getPodcasts();
     const podcast = podcasts?.find((podcast) => podcast.id === podcastId);
     if (!podcast) {
-      navigate("/404");
+      navigate(ROUTES.NOT_FOUND);
       dispatch({ type: LoadingActionTypes.POP });
       return;
     }

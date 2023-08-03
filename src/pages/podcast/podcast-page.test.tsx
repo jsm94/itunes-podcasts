@@ -1,26 +1,30 @@
 import { waitFor } from "@testing-library/react";
 import { Route } from "react-router";
 
+import { ROUTES } from "../../constants/app.constants";
+
 import { renderWithRouter } from "../../mocks/render-with-providers";
 
-import { PodcastEpisodesListContainer } from "../../components/podcasts/podcast-episodes-list-container";
 import { mockEpisodesListData } from "../../modules/podcasts/infra/mocks/mockEpisodesListData";
 import { mockPodcastsListData } from "../../modules/podcasts/infra/mocks/mockPodcastsListData";
+
+import { PodcastEpisodesListContainer } from "../../components/podcasts/podcast-episodes-list-container";
+
 import { PodcastPage } from "./podcast-page";
 
 const renderPodcastPage = () => {
   return renderWithRouter(<PodcastPage />, {
-    route: "/podcast/1437402802", // "A History of Rock Music in 500 Songs" mocked id
-    path: "/podcast/:podcastId",
+    route: `${ROUTES.PODCAST}/1437402802`, // "A History of Rock Music in 500 Songs" mocked id
+    path: ROUTES.PODCAST_DETAIL,
     children: [
       <Route
         key={1}
-        path="/podcast/:podcastId"
+        path={ROUTES.PODCAST_DETAIL}
         element={<PodcastEpisodesListContainer />}
       />,
       <Route
         key={1}
-        path="/podcast/:podcastId/episode/:episodeId"
+        path={ROUTES.PODCAST_EPISODE_DETAIL}
         element={<h1>Bakar - Hell N Back</h1>}
       />,
     ],

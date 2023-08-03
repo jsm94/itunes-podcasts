@@ -5,7 +5,7 @@ import { Podcast } from "../../modules/podcasts/domain/Podcast";
 import {
   LoadingActionTypes,
   useLoadingDispatch,
-} from "../../context/LoadingContext";
+} from "../../context/loading-context";
 
 import { useDebounceCallback } from "../../hooks/debounce/useDebounceCallback";
 import { usePodcasts } from "../../hooks/podcasts/usePodcasts";

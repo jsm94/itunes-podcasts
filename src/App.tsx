@@ -1,7 +1,7 @@
 import { Link, Outlet } from "react-router-dom";
 
 import { Header } from "./components/header";
-import { useLoading } from "./context/LoadingContext";
+import { useLoading } from "./context/loading-context";
 
 export const App: React.FC = () => {
   const state = useLoading();

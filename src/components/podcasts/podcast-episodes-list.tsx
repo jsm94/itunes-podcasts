@@ -1,5 +1,9 @@
 import { Link } from "react-router-dom";
+
+import { ROUTES } from "../../constants/app.constants";
+
 import { Episode } from "../../modules/podcasts/domain/Episode";
+
 import { msToDuration } from "../../utils/formatters";
 
 import "./podcast-episodes-list.css";
@@ -25,7 +29,9 @@ export const PodcastEpisodesList = ({
       {episodes?.map((episode) => (
         <tr key={episode.id}>
           <td className="podcast-episodes-list__episode-title">
-            <Link to={`episode/${episode.id}`}>{episode.title}</Link>
+            <Link to={`${ROUTES.PODCAST_EPISODE_RELATIVE}/${episode.id}`}>
+              {episode.title}
+            </Link>
           </td>
           <td>{new Date(episode.releaseDate).toLocaleDateString()}</td>
           <td className="podcast-episodes-list__episode-duration">
