@@ -1,5 +1,5 @@
 export const msToDuration = (ms: number | undefined): string => {
-  if (!ms) return "00:00";
+  if (!ms) return "-";
   const seconds = Math.floor((ms / 1000) % 60);
   const minutes = Math.floor((ms / (1000 * 60)) % 60);
   const hours = Math.floor((ms / (1000 * 60 * 60)) % 24);
