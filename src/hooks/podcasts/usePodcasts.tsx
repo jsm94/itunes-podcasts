@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 
 import { PodcastService } from "../../modules/podcasts/application/PodcastService";
 import { Episode } from "../../modules/podcasts/domain/Episode";
@@ -13,8 +13,6 @@ const KEY_EPISODES = "episodes";
 type Element = Podcast[] | Episode[];
 
 export const usePodcasts = () => {
-  const [podcasts, setPodcasts] = useState<Podcast[]>([]);
-  const [episodes, setEpisodes] = useState<Episode[]>([]);
   const { setItem, getItem } = useLocalStorage<
     Element | Map<string, Episode[]>
   >();
@@ -32,8 +30,7 @@ export const usePodcasts = () => {
   const getPodcasts = async () => {
     const cachedPodcasts = getItem(KEY_PODCASTS) as Podcast[];
     if (cachedPodcasts?.length) {
-      setPodcasts(cachedPodcasts);
-      return;
+      return cachedPodcasts;
     }
     const podcastApi = new PodcastService(
       new ApiPodcastService(abortController.current),
@@ -42,7 +39,7 @@ export const usePodcasts = () => {
     try {
       const response = await podcastApi.getMostPopularPodcasts(100);
       setItem(KEY_PODCASTS, response);
-      setPodcasts(response);
+      return response;
     } catch (error) {
       console.log(error);
     }
@@ -58,8 +55,7 @@ export const usePodcasts = () => {
     }
 
     if (cachedEpisodes?.has(podcastId)) {
-      setEpisodes(cachedEpisodes.get(podcastId) as Episode[]);
-      return;
+      return cachedEpisodes.get(podcastId);
     }
 
     const podcastApi = new PodcastService(
@@ -70,15 +66,13 @@ export const usePodcasts = () => {
       const response = await podcastApi.getEpisodesByPodcastId(podcastId);
       cachedEpisodes?.set(podcastId, response);
       setItem(KEY_EPISODES, cachedEpisodes);
-      setEpisodes(response);
+      return response;
     } catch (error) {
       console.log(error);
     }
   };
 
   return {
-    podcasts,
-    episodes,
     getPodcasts,
     getEpisodes,
   };

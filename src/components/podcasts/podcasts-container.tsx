@@ -19,9 +19,11 @@ import { PodcastCardLink } from "./podcast-card-link";
 import "./podcast-container.css";
 
 export const PodcastsContainer = () => {
-  const { podcasts, getPodcasts } = usePodcasts();
+  const [podcasts, setPodcasts] = useState<Podcast[] | undefined>([]);
   const [filter, setFilter] = useState("");
   const [filteredPodcasts, setFilteredPodcasts] = useState(podcasts);
+
+  const { getPodcasts } = usePodcasts();
   const dispatch = useLoadingDispatch();
 
   const _filterPodcasts = (podcastsToFilter: Podcast[]) => {
@@ -34,15 +36,19 @@ export const PodcastsContainer = () => {
     );
   };
 
+  const loadData = async () => {
+    dispatch({ type: LoadingActionTypes.PUSH });
+    const podcasts = await getPodcasts();
+    setPodcasts(podcasts);
+    dispatch({ type: LoadingActionTypes.POP });
+  };
+
   const debouncedFilter = useDebounceCallback(() => {
-    setFilteredPodcasts(_filterPodcasts(podcasts));
+    setFilteredPodcasts(_filterPodcasts(podcasts!));
   }, 500);
 
   useEffect(() => {
-    dispatch({ type: LoadingActionTypes.PUSH });
-    getPodcasts().finally(() => {
-      dispatch({ type: LoadingActionTypes.POP });
-    });
+    loadData();
   }, []);
 
   useEffect(() => {
@@ -66,13 +72,13 @@ export const PodcastsContainer = () => {
         />
       </div>
       <div className="podcasts-container__list">
-        {filteredPodcasts.map((podcast) => (
+        {filteredPodcasts?.map((podcast) => (
           <PodcastCardLink key={podcast.id} podcast={podcast} />
         ))}
-        {filteredPodcasts.length === 0 && !filter && (
+        {filteredPodcasts?.length === 0 && !filter && (
           <PodcastsContainerSkeletons />
         )}
-        {filteredPodcasts.length === 0 && filter && (
+        {filteredPodcasts?.length === 0 && filter && (
           <p>
             No podcasts found for filter: <b>{filter}</b>
           </p>

@@ -1,0 +1,4 @@
+.error-boundary__container {
+  max-width: var(--app-layout-max-width);
+  margin: 0 auto;
+}

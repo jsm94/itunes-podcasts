@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Outlet, useParams } from "react-router-dom";
+import { Outlet, useNavigate, useParams } from "react-router-dom";
 
 import {
   LoadingActionTypes,
@@ -17,21 +17,27 @@ import "./podcast-page.css";
 
 export const PodcastPage = () => {
   const [podcast, setPodcast] = useState<Podcast | undefined>(undefined);
-  const { getPodcasts, podcasts } = usePodcasts();
   const { podcastId } = useParams<{ podcastId: string }>();
+  const navigate = useNavigate();
+
+  const { getPodcasts } = usePodcasts();
   const dispatch = useLoadingDispatch();
 
-  useEffect(() => {
+  const loadData = async () => {
     dispatch({ type: LoadingActionTypes.PUSH });
-    getPodcasts().finally(() => {
-      dispatch({ type: LoadingActionTypes.POP });
-    });
-  }, []);
+    const podcasts = await getPodcasts();
+    const podcast = podcasts?.find((podcast) => podcast.id === podcastId);
+    if (!podcast) {
+      navigate("/404");
+      return;
+    }
+    setPodcast(podcast);
+    dispatch({ type: LoadingActionTypes.POP });
+  };
 
   useEffect(() => {
-    const podcast = podcasts.find((podcast) => podcast.id === podcastId);
-    setPodcast(podcast);
-  }, [podcasts]);
+    loadData();
+  }, []);
 
   return (
     <div className="podcast-page">

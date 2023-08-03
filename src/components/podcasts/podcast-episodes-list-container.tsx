@@ -1,5 +1,7 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+
+import { Episode } from "../../modules/podcasts/domain/Episode";
 
 import {
   LoadingActionTypes,
@@ -13,15 +15,21 @@ import { Card } from "../card/card";
 import { PodcastEpisodesList } from "./podcast-episodes-list";
 
 export const PodcastEpisodesListContainer = () => {
-  const { getEpisodes, episodes } = usePodcasts();
   const { podcastId } = useParams<{ podcastId: string }>();
+  const [episodes, setEpisodes] = useState<Episode[] | undefined>(undefined);
+
+  const { getEpisodes } = usePodcasts();
   const dispatch = useLoadingDispatch();
 
-  useEffect(() => {
+  const loadData = async () => {
     dispatch({ type: LoadingActionTypes.PUSH });
-    getEpisodes(podcastId!).finally(() => {
-      dispatch({ type: LoadingActionTypes.POP });
-    });
+    const episodes = await getEpisodes(podcastId!);
+    setEpisodes(episodes);
+    dispatch({ type: LoadingActionTypes.POP });
+  };
+
+  useEffect(() => {
+    loadData();
   }, []);
 
   return (
