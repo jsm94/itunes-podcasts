@@ -46,13 +46,13 @@ export const usePodcasts = () => {
   };
 
   const getEpisodes = async (podcastId: string) => {
-    let cachedEpisodes = new Map<string, Episode[]>(
+    const cachedEpisodes = new Map<string, Episode[]>(
       getItem(KEY_EPISODES) as Map<string, Episode[]>,
     );
 
-    if (cachedEpisodes.size === 0) {
-      cachedEpisodes = new Map<string, Episode[]>();
-    }
+    // if (cachedEpisodes.size === 0) {
+    //   cachedEpisodes = new Map<string, Episode[]>();
+    // }
 
     if (cachedEpisodes?.has(podcastId)) {
       return cachedEpisodes.get(podcastId);
