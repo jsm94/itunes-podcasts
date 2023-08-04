@@ -11,6 +11,7 @@
     "format": "prettier --write ./src",
     "start": "webpack serve --mode development",
     "test": "jest",
+    "test:coverage": "jest --coverage",
     "prepare": "husky install"
   },
   "author": "@jsm94",
