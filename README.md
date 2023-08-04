@@ -108,5 +108,6 @@ Minimal versions:
 
 - Start Dev Server: `npm run start`
 - Run tests: `npm run test`
+- Run test coverage: `npm run test:coverage`
 - Lint: `npm run lint` or `npm run lint:fix`
 - Format: `npm run format`
