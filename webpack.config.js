@@ -39,5 +39,10 @@ module.exports = (env, argv) => {
       historyApiFallback: true,
       port: 3000,
     },
+    optimization: {
+      splitChunks: {
+        chunks: "all",
+      },
+    },
   };
 };

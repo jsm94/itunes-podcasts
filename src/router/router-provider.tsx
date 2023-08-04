@@ -1,4 +1,4 @@
-import { StrictMode } from "react";
+import { StrictMode, Suspense, lazy } from "react";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 
 import { ROUTES } from "../constants/app.constants";
@@ -6,12 +6,36 @@ import { ROUTES } from "../constants/app.constants";
 import { LoadingProvider } from "../context/loading-context";
 
 import { ErrorBoundary } from "../components/error-boundary";
-import { PodcastEpisodeDetail } from "../components/podcasts/podcast-episode-detail";
-import { PodcastEpisodesListContainer } from "../components/podcasts/podcast-episodes-list-container";
 
-import { Home } from "../pages/home/home";
-import { NotFoundPage } from "../pages/not-found/not-found-page";
-import { PodcastPage } from "../pages/podcast/podcast-page";
+const PodcastEpisodeDetail = lazy(() =>
+  import("../components/podcasts/podcast-episode-detail").then((module) => ({
+    default: module.PodcastEpisodeDetail,
+  })),
+);
+
+const Home = lazy(() =>
+  import("../pages/home/home").then((module) => ({ default: module.Home })),
+);
+
+const PodcastEpisodesListContainer = lazy(() =>
+  import("../components/podcasts/podcast-episodes-list-container").then(
+    (module) => ({
+      default: module.PodcastEpisodesListContainer,
+    }),
+  ),
+);
+
+const NotFoundPage = lazy(() =>
+  import("../pages/not-found/not-found-page").then((module) => ({
+    default: module.NotFoundPage,
+  })),
+);
+
+const PodcastPage = lazy(() =>
+  import("../pages/podcast/podcast-page").then((module) => ({
+    default: module.PodcastPage,
+  })),
+);
 
 const router = (parentElement: React.ReactNode) =>
   createBrowserRouter([
@@ -22,23 +46,43 @@ const router = (parentElement: React.ReactNode) =>
       children: [
         {
           path: ROUTES.HOME,
-          element: <Home />,
+          element: (
+            <Suspense>
+              <Home />
+            </Suspense>
+          ),
         },
         {
           path: ROUTES.NOT_FOUND,
-          element: <NotFoundPage />,
+          element: (
+            <Suspense>
+              <NotFoundPage />
+            </Suspense>
+          ),
         },
         {
           path: ROUTES.PODCAST_DETAIL,
-          element: <PodcastPage />,
+          element: (
+            <Suspense>
+              <PodcastPage />
+            </Suspense>
+          ),
           children: [
             {
               path: ROUTES.PODCAST_DETAIL,
-              element: <PodcastEpisodesListContainer />,
+              element: (
+                <Suspense>
+                  <PodcastEpisodesListContainer />
+                </Suspense>
+              ),
             },
             {
               path: ROUTES.PODCAST_EPISODE_DETAIL,
-              element: <PodcastEpisodeDetail />,
+              element: (
+                <Suspense>
+                  <PodcastEpisodeDetail />
+                </Suspense>
+              ),
             },
           ],
         },

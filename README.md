@@ -86,13 +86,17 @@ Following the previous guidelines and making some assumptions and opinions, I de
 I also decided to implement a **hexagonal architecture** and **DDD** for better scalability and testable code.
 Use of **ITCSS** architecture to organize the css in conjunction with the **BEM** methodology, thus improving scalability and maintenance of the project and its components.
 
+For the size of this project, it's not necessary but I added **Code Splitting** technics to minimize the main bundle size by applying **Lazy and Suspense** modules from **React**. In a hypothetical situation when the app grows that technics improves **core web vitals** and performance.
+
 ---
 
 ## Instructions
 
 ### Tools & Versions
 
-- _Node v16.20.1_
+Minimal versions:
+
+- _Node v18.X_
 - _npm 8.19.4_
 
 ### Build
