@@ -2,6 +2,13 @@ import { Episode } from "../domain/Episode";
 import { Podcast } from "../domain/Podcast";
 import { PodcastRepository } from "../domain/PodcastRepository";
 
+import {
+  API_ESPISODES_URL,
+  API_URL,
+  GENRE,
+  PROXY_URL,
+} from "./constants/api.constants";
+
 import { mapperEpisodesServiceResponseToEpisode } from "./mappers/mapperEpisodesServiceResponseToEpisode";
 import { mapperPodcastServiceResponseToPodcast } from "./mappers/mapperPodcastServiceResponseToPodcast";
 
@@ -11,7 +18,7 @@ import { ApiPodcastServiceResponse } from "./types/ApiPodcastServiceResponse";
 const MIN_LIMIT = 0;
 const MAX_LIMIT = 200;
 
-const proxyUrl = "https://api.allorigins.win/raw?url=";
+const proxyUrl = PROXY_URL;
 
 const podcastLimit = (limit: number) => {
   if (limit <= MIN_LIMIT || limit > MAX_LIMIT) {
@@ -30,7 +37,7 @@ export class ApiPodcastService implements PodcastRepository {
     podcastLimit(limit);
     try {
       const response = await fetch(
-        `https://itunes.apple.com/us/rss/toppodcasts/limit=${limit}/genre=1310/json`,
+        API_URL.replace("{limit}", limit.toString()).replace("{genre}", GENRE),
         {
           method: "GET",
           signal: this.abortController.signal,
@@ -47,7 +54,7 @@ export class ApiPodcastService implements PodcastRepository {
     try {
       const response = await fetch(
         `${proxyUrl}${encodeURIComponent(
-          `https://itunes.apple.com/lookup?id=${id}&media=podcast&entity=podcastEpisode`,
+          API_ESPISODES_URL.replace("{id}", id),
         )}`,
         {
           method: "GET",

@@ -9,6 +9,11 @@ import { PodcastEpisodeDetail } from "../components/podcasts/podcast-episode-det
 import { PodcastEpisodesListContainer } from "../components/podcasts/podcast-episodes-list-container";
 import { ROUTES } from "../constants/app.constants";
 import { renderWithRouter } from "../mocks/render-with-providers";
+import {
+  API_LIMIT,
+  API_URL,
+  GENRE,
+} from "../modules/podcasts/infra/constants/api.constants";
 import { mockEpisodesListData } from "../modules/podcasts/infra/mocks/mockEpisodesListData";
 import { mockPodcastsListData } from "../modules/podcasts/infra/mocks/mockPodcastsListData";
 import { Home } from "../pages/home/home";
@@ -47,8 +52,7 @@ describe("Happy-path from search a podcast to listen an episode", () => {
   beforeAll(async () => {
     global.fetch = jest.fn((url) => {
       if (
-        url ===
-        "https://itunes.apple.com/us/rss/toppodcasts/limit=100/genre=1310/json"
+        url === API_URL.replace("{limit}", API_LIMIT).replace("{genre}", GENRE)
       ) {
         return Promise.resolve({
           json: () => Promise.resolve(mockPodcastsListData),

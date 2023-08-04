@@ -10,6 +10,11 @@ import { mockPodcastsListData } from "../../modules/podcasts/infra/mocks/mockPod
 
 import { PodcastEpisodesListContainer } from "../../components/podcasts/podcast-episodes-list-container";
 
+import {
+  API_LIMIT,
+  API_URL,
+  GENRE,
+} from "../../modules/podcasts/infra/constants/api.constants";
 import { PodcastPage } from "./podcast-page";
 
 const renderPodcastPage = () => {
@@ -35,8 +40,7 @@ describe("Podcast", () => {
   beforeAll(() => {
     global.fetch = jest.fn((url) => {
       if (
-        url ===
-        "https://itunes.apple.com/us/rss/toppodcasts/limit=100/genre=1310/json"
+        url === API_URL.replace("{limit}", API_LIMIT).replace("{genre}", GENRE)
       ) {
         return Promise.resolve({
           json: () => Promise.resolve(mockPodcastsListData),
