@@ -18,13 +18,13 @@ export const usePodcasts = () => {
     Element | Map<string, Episode[]>
   >();
 
-  const abortController = useRef(new AbortController());
+  const abortController = useRef<AbortController>();
 
   useEffect(() => {
     abortController.current = new AbortController();
 
     return () => {
-      abortController.current.abort();
+      abortController.current?.abort();
     };
   }, []);
 
@@ -34,7 +34,7 @@ export const usePodcasts = () => {
       return cachedPodcasts;
     }
     const podcastApi = new PodcastService(
-      new ApiPodcastService(abortController.current),
+      new ApiPodcastService(abortController.current!),
     );
 
     try {
@@ -58,7 +58,7 @@ export const usePodcasts = () => {
     }
 
     const podcastApi = new PodcastService(
-      new ApiPodcastService(abortController.current),
+      new ApiPodcastService(abortController.current!),
     );
 
     try {
