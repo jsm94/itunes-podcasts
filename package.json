@@ -1,6 +1,6 @@
 {
   "name": "itunes-podcasts",
-  "version": "1.3.2",
+  "version": "1.3.3",
   "description": "Frontend Technical Assessment - iTunes podcasts mini-app",
   "main": "index.js",
   "scripts": {
@@ -12,6 +12,8 @@
     "start": "webpack serve --mode development",
     "test": "jest",
     "test:coverage": "jest --coverage",
+    "test:e2e": "cypress run",
+    "cypress:open": "cypress open",
     "prepare": "husky install"
   },
   "author": "@jsm94",
@@ -36,6 +38,7 @@
     "babel-jest": "^29.6.2",
     "babel-loader": "^9.1.3",
     "css-loader": "^6.8.1",
+    "cypress": "^13.1.0",
     "eslint": "^8.45.0",
     "eslint-config-prettier": "^8.9.0",
     "eslint-plugin-prettier": "^5.0.0",

@@ -4,6 +4,7 @@
 echo "🎢 Checking that all tests pass..."
 
 npm run test
+npm run test:e2e
 
 echo "💎 Linting and formatting your staged files..."
 

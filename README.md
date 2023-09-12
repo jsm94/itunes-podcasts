@@ -79,6 +79,7 @@ Following the previous guidelines and making some assumptions and opinions, I de
 - **TypeScript**: a JavaScript superset to improve development experience and maintainability with types and interfaces.
 - **CSS**: only native CSS applying the BEM approach
 - **Jest & React Testing Library**: for testing purpouses
+- **Cypress**: for e2e testing
 - **ESLint & Prettier**: for ensuring code quality, consistency, and adherence to coding standards.
 - **Husky**: for run tests, lint and format before a commit to ensure code quality.
 - **React Router Dom v6**: to manage navigation
@@ -99,6 +100,10 @@ Minimal versions:
 - _Node v18.X_
 - _npm 8.19.4_
 
+### Installation
+
+- `npm install`
+
 ### Build
 
 - Production bundle: `npm run build:pro`
@@ -107,7 +112,14 @@ Minimal versions:
 ### Dev Scripts
 
 - Start Dev Server: `npm run start`
-- Run tests: `npm run test`
-- Run test coverage: `npm run test:coverage`
 - Lint: `npm run lint` or `npm run lint:fix`
 - Format: `npm run format`
+
+### Testing
+
+- Run unit/integration tests: `npm run test`
+- Run E2E test: `npm run test:e2e`
+- Run E2E test on browser: `npm run cypress:open`
+- Run test coverage: `npm run test:coverage`
+
+**\*Be sure that web server is running (`npm run start`) before Cypress tests.**
