@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom";
-import { Podcast } from "../../modules/podcasts/domain/Podcast";
+import { Podcast } from "../../../modules/podcasts/domain/Podcast";
 
-import { Card } from "../card/card";
+import { Card } from "../../card/card";
 
-import { ROUTES } from "../../constants/app.constants";
+import { ROUTES } from "../../../constants/app.constants";
 import "./podcast-card-detail.css";
 
 type PodcastCardDetailProps = {

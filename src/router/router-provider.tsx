@@ -18,11 +18,11 @@ const Home = lazy(() =>
 );
 
 const PodcastEpisodesListContainer = lazy(() =>
-  import("../components/podcasts/podcast-episodes-list-container").then(
-    (module) => ({
-      default: module.PodcastEpisodesListContainer,
-    }),
-  ),
+  import(
+    "../components/podcasts/podcast-episodes-list/podcast-episodes-list-container"
+  ).then((module) => ({
+    default: module.PodcastEpisodesListContainer,
+  })),
 );
 
 const NotFoundPage = lazy(() =>

@@ -1,11 +1,11 @@
 import { memo } from "react";
 import { Link } from "react-router-dom";
 
-import { ROUTES } from "../../constants/app.constants";
+import { ROUTES } from "../../../constants/app.constants";
 
-import { Podcast } from "../../modules/podcasts/domain/Podcast";
+import { Podcast } from "../../../modules/podcasts/domain/Podcast";
 
-import { PodcastCard } from "./podcast-card";
+import { PodcastCard } from "../podcast-card";
 
 type PodcastCardLinkProps = {
   className?: string;

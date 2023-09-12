@@ -1,22 +1,22 @@
 import { useEffect, useRef, useState } from "react";
 
-import { Podcast } from "../../modules/podcasts/domain/Podcast";
+import { Podcast } from "../../../modules/podcasts/domain/Podcast";
 
 import {
   LoadingActionTypes,
   useLoadingDispatch,
-} from "../../context/loading-context";
+} from "../../../context/loading-context";
 
-import { useDebounceCallback } from "../../hooks/debounce/useDebounceCallback";
-import { usePodcasts } from "../../hooks/podcasts/usePodcasts";
+import { useDebounceCallback } from "../../../hooks/debounce/useDebounceCallback";
+import { usePodcasts } from "../../../hooks/podcasts/usePodcasts";
 
-import { filterPodcasts } from "../../utils/filters";
+import { filterPodcasts } from "../../../utils/filters";
 
-import { Badge } from "../ui/badge";
-import { Input } from "../ui/input";
+import { Badge } from "../../ui/badge";
+import { Input } from "../../ui/input";
 
-import { PodcastCardSkeleton } from "./podcast-card";
-import { PodcastCardLink } from "./podcast-card-link";
+import { PodcastCardSkeleton } from "../podcast-card";
+import { PodcastCardLink } from "../podcast-card-link/podcast-card-link";
 
 import "./podcast-container.css";
 

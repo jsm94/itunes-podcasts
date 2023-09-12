@@ -1,20 +1,20 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
-import { Episode } from "../../modules/podcasts/domain/Episode";
+import { Episode } from "../../../modules/podcasts/domain/Episode";
 
-import { ROUTES } from "../../constants/app.constants";
+import { ROUTES } from "../../../constants/app.constants";
 
-import { usePodcasts } from "../../hooks/podcasts/usePodcasts";
+import { usePodcasts } from "../../../hooks/podcasts/usePodcasts";
 
-import { parseTextToHtml } from "../../utils/formatters";
+import { parseTextToHtml } from "../../../utils/formatters";
 
-import { Card } from "../card/card";
+import { Card } from "../../card/card";
 
 import {
   LoadingActionTypes,
   useLoadingDispatch,
-} from "../../context/loading-context";
+} from "../../../context/loading-context";
 import "./podcast-episode-detail.css";
 
 export const PodcastEpisodeDetail = () => {

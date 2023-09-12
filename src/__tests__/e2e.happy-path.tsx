@@ -6,7 +6,7 @@ import { Route } from "react-router";
 
 import { App } from "../App";
 import { PodcastEpisodeDetail } from "../components/podcasts/podcast-episode-detail";
-import { PodcastEpisodesListContainer } from "../components/podcasts/podcast-episodes-list-container";
+import { PodcastEpisodesListContainer } from "../components/podcasts/podcast-episodes-list/podcast-episodes-list-container";
 import { ROUTES } from "../constants/app.constants";
 import { renderWithRouter } from "../mocks/render-with-providers";
 import {

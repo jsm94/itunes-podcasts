@@ -1,16 +1,16 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
-import { Episode } from "../../modules/podcasts/domain/Episode";
+import { Episode } from "../../../modules/podcasts/domain/Episode";
 
 import {
   LoadingActionTypes,
   useLoadingDispatch,
-} from "../../context/loading-context";
+} from "../../../context/loading-context";
 
-import { usePodcasts } from "../../hooks/podcasts/usePodcasts";
+import { usePodcasts } from "../../../hooks/podcasts/usePodcasts";
 
-import { Card } from "../card/card";
+import { Card } from "../../card/card";
 
 import { PodcastEpisodesList } from "./podcast-episodes-list";
 

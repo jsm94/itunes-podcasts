@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
 
-import { ROUTES } from "../../constants/app.constants";
+import { ROUTES } from "../../../constants/app.constants";
 
-import { Episode } from "../../modules/podcasts/domain/Episode";
+import { Episode } from "../../../modules/podcasts/domain/Episode";
 
-import { msToDuration } from "../../utils/formatters";
+import { msToDuration } from "../../../utils/formatters";
 
 import "./podcast-episodes-list.css";
 

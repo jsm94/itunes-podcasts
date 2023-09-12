@@ -8,7 +8,7 @@ import { renderWithRouter } from "../../mocks/render-with-providers";
 import { mockEpisodesListData } from "../../modules/podcasts/infra/mocks/mockEpisodesListData";
 import { mockPodcastsListData } from "../../modules/podcasts/infra/mocks/mockPodcastsListData";
 
-import { PodcastEpisodesListContainer } from "../../components/podcasts/podcast-episodes-list-container";
+import { PodcastEpisodesListContainer } from "../../components/podcasts/podcast-episodes-list/podcast-episodes-list-container";
 
 import {
   API_LIMIT,

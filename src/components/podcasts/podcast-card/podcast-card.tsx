@@ -1,4 +1,4 @@
-import { Podcast } from "../../modules/podcasts/domain/Podcast";
+import { Podcast } from "../../../modules/podcasts/domain/Podcast";
 
 import "./podcast-card.css";
 
