@@ -1,4 +1,4 @@
-import { waitFor } from "@testing-library/react";
+import { screen, waitFor } from "@testing-library/react";
 import { App } from "./App";
 import { renderWithRouter } from "./mocks/render-with-providers";
 import { mockPodcastsListData } from "./modules/podcasts/infra/mocks/mockPodcastsListData";
@@ -20,12 +20,10 @@ describe("App", () => {
     });
   });
 
-  it("renders the header with the text 'Podcaster'", () => {
-    const { getByRole } = renderWithRouter(<App />);
-    const header = getByRole("heading", { name: /podcaster/i });
+  it("renders the header with the text 'Podcaster'", async () => {
+    renderWithRouter(<App />);
+    const header = await screen.findByRole("heading", { name: /podcaster/i });
 
-    waitFor(() => {
-      expect(header).toBeInTheDocument();
-    });
+    expect(header).toBeInTheDocument();
   });
 });

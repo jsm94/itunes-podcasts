@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable react/no-children-prop */
 
-import { fireEvent, waitFor } from "@testing-library/react";
+import { fireEvent, screen, waitFor } from "@testing-library/react";
 import { Route } from "react-router";
 
 import { App } from "../App";
@@ -72,66 +72,56 @@ describe("Happy-path from search a podcast to listen an episode", () => {
   });
 
   it('should render the header with the title "Podcasts"', async () => {
-    const { getByRole } = renderApp();
-    await waitFor(() => {
-      expect(getByRole("heading", { name: /podcaster/i })).toBeInTheDocument();
-    });
+    renderApp();
+    expect(
+      await screen.findByRole("heading", { name: /podcaster/i }),
+    ).toBeInTheDocument();
   });
 
   it('should search the podcast "A History of Rock Music in 500 Songs", click on it and navigates to podcast page', async () => {
-    const { getByRole, getByPlaceholderText, getAllByRole } = renderApp();
+    renderApp();
 
-    const input = getByPlaceholderText(/filter podcasts.../i);
-    await waitFor(() => {
-      expect(input).toBeInTheDocument();
-    });
+    const input = await screen.findByPlaceholderText(/filter podcasts.../i);
+    expect(input).toBeInTheDocument();
 
     fireEvent.change(input, {
       target: { value: "A History of Rock Music in 500 Songs" },
     });
 
-    const podcastCard = getAllByRole("link").find(
+    const podcastCards = await screen.findAllByRole("link");
+    const podcastCardFinded = podcastCards.find(
       (link) => link.getAttribute("href") === `${ROUTES.PODCAST}/${PODCAST_ID}`,
     );
-    await waitFor(() => {
-      expect(podcastCard).toBeInTheDocument();
-    });
+    expect(podcastCardFinded).toBeInTheDocument();
 
-    fireEvent.click(podcastCard!);
-    await waitFor(() => {
-      expect(
-        getByRole("heading", { name: /A History of Rock Music in 500 Songs/i }),
-      ).toBeInTheDocument();
-    });
+    fireEvent.click(podcastCardFinded!);
+    expect(
+      await screen.findByRole("heading", {
+        name: /A History of Rock Music in 500 Songs/i,
+      }),
+    ).toBeInTheDocument();
   });
 
   it("should render episodes list and click on the first episode to navigate to episode detail page", async () => {
-    const { getByRole, getAllByRole, getByText } = renderApp();
+    renderApp();
 
-    await waitFor(() => {
-      expect(
-        getByText(/A History of Rock Music in 500 Songs/i),
-      ).toBeInTheDocument();
-    });
+    const podcastTitle = /A History of Rock Music in 500 Songs/i;
 
-    const podcastCard = getAllByRole("link").find(
+    expect(await screen.findByText(podcastTitle)).toBeInTheDocument();
+
+    const podcastCards = await screen.findAllByRole("link");
+    const podcastCardFinded = podcastCards.find(
       (link) => link.getAttribute("href") === `${ROUTES.PODCAST}/${PODCAST_ID}`,
     );
-    await waitFor(() => {
-      expect(podcastCard).toBeInTheDocument();
-    });
+    expect(podcastCardFinded).toBeInTheDocument();
 
-    fireEvent.click(podcastCard!);
-    await waitFor(() => {
-      expect(
-        getByRole("heading", { name: /A History of Rock Music in 500 Songs/i }),
-      ).toBeInTheDocument();
-    });
+    fireEvent.click(podcastCardFinded!);
+    expect(
+      await screen.findByRole("heading", { name: podcastTitle }),
+    ).toBeInTheDocument();
 
-    const episodesList = getAllByRole("link");
-    await waitFor(() => {
-      expect(episodesList.length).toBeGreaterThan(2);
-    });
+    const episodesList = await screen.findAllByRole("link");
+    expect(episodesList.length).toBeGreaterThan(2);
 
     const episode = episodesList.find(
       (link) =>
@@ -140,10 +130,8 @@ describe("Happy-path from search a podcast to listen an episode", () => {
     );
 
     fireEvent.click(episode!);
-    await waitFor(() => {
-      expect(
-        getByRole("heading", { name: /Bakar - Hell N Back/i }),
-      ).toBeInTheDocument();
-    });
+    expect(
+      await screen.findByRole("heading", { name: /Bakar - Hell N Back/i }),
+    ).toBeInTheDocument();
   });
 });

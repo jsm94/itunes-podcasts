@@ -23,56 +23,50 @@ describe("Home", () => {
   });
 
   it("should have a list of the 100 most popular podcasts", async () => {
-    const { getByText } = renderWithRouter(<Home />);
-    await waitFor(() => {
-      expect(
-        getByText(/A History of Rock Music in 500 Songs/i),
-      ).toBeInTheDocument();
-    });
+    renderWithRouter(<Home />);
+
+    const podcastTitle = await screen.findByText(
+      /A History of Rock Music in 500 Songs/i,
+    );
+
+    expect(podcastTitle).toBeInTheDocument();
   });
 
   it("should have an input to search for podcasts", async () => {
-    const { getByPlaceholderText } = renderWithRouter(<Home />);
-    await waitFor(() => {
-      expect(getByPlaceholderText(/filter podcasts.../i)).toBeInTheDocument();
-    });
+    renderWithRouter(<Home />);
+
+    const input = await screen.findByPlaceholderText(/filter podcasts.../i);
+
+    expect(input).toBeInTheDocument();
   });
 
   it("should filter with a non match word when typing in the input and show nothing", async () => {
-    const { getByPlaceholderText, getByText } = renderWithRouter(<Home />);
+    renderWithRouter(<Home />);
 
-    await waitFor(() => {
-      expect(
-        getByText(/A History of Rock Music in 500 Songs/i),
-      ).toBeInTheDocument();
-    });
+    const podcastTitle = /A History of Rock Music in 500 Songs/i;
 
-    const input = getByPlaceholderText(/filter podcasts.../i);
+    expect(await screen.findByText(podcastTitle)).toBeInTheDocument();
+
+    const input = await screen.findByPlaceholderText(/filter podcasts.../i);
     fireEvent.change(input, { target: { value: "nonmatch" } });
 
-    await waitFor(() => {
-      expect(
-        screen.queryByText(/A History of Rock Music in 500 Songs/i),
-      ).not.toBeInTheDocument();
+    waitFor(() => {
+      expect(screen.getByText(podcastTitle)).not.toBeInTheDocument();
     });
   });
 
   it("should show a count of the filtered podcasts", async () => {
-    const { getByRole, getByPlaceholderText, getByText } = renderWithRouter(
-      <Home />,
-    );
+    renderWithRouter(<Home />);
 
-    await waitFor(() => {
-      expect(
-        getByText(/A History of Rock Music in 500 Songs/i),
-      ).toBeInTheDocument();
-    });
+    const podcastTitle = /A History of Rock Music in 500 Songs/i;
 
-    const input = getByPlaceholderText(/filter podcasts.../i);
+    expect(await screen.findByText(podcastTitle)).toBeInTheDocument();
+
+    const input = await screen.findByPlaceholderText(/filter podcasts.../i);
     fireEvent.change(input, { target: { value: "history" } });
 
-    await waitFor(() => {
-      expect(getByRole("status").innerHTML === "1").toBeTruthy();
-    });
+    const statusElement = await screen.findByRole("status");
+
+    expect(statusElement.innerHTML === "1").toBeTruthy();
   });
 });
